@@ -1,0 +1,21 @@
+{
+	"name": "api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon server.ts"
+	},
+	"author": "Steve Giordano",
+	"license": "ISC",
+	"prisma": {
+	  "schema": "src/models/schema.prisma"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.16",
+		"prisma": "^3.13.0"
+	},
+	"dependencies": {
+		"fastify": "^3.29.0"
+	}
+}

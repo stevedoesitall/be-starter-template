@@ -1,0 +1,43 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap");
+
+$purple: #5a32a3;
+$blue: #3254a3;
+$brown: #a37f32;
+$pink: #a86e9d;
+$grey-dark: #0d0d0e;
+$grey-light: #797575;
+$green: #7ba332;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+
+$family-sans-serif: "Roboto", sans-serif;
+$family-secondary: "Roboto Slab", serif;
+$grey-dark: $grey-dark;
+$grey-light: $grey-light;
+$primary: $purple;
+$primary-inverted: $green;
+$danger: $pink;
+$info: $blue;
+$warning: $blue;
+$link: $purple;
+$success: $green;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+$danger: $pink;
+$input-placeholder-color: $grey-light;
+
+$body-background-color: $beige-lighter;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+@import "../../../node_modules/bulma/sass/helpers/_all.sass";
+@import "../../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../../node_modules/bulma/sass/base/_all.sass";
+@import "../../../node_modules/bulma/sass/components/_all.sass";
+@import "../../../node_modules/bulma/sass/elements/_all.sass";
+@import "../../../node_modules/bulma/sass/grid/_all.sass";
+@import "../../../node_modules/bulma/sass/layout/_all.sass";
+@import "../../../node_modules/bulma/sass/form/_all.sass";
