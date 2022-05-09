@@ -5,7 +5,17 @@ import esbuildHTML from "./plugins/esbuild-html.mjs";
 import esbuildStyles from "./plugins/esbuild-styles.mjs";
 import esbuildImages from "./plugins/esbuild-images.mjs";
 
-// Bundle JS and CSS files
+// Bundle server file
+build({
+	entryPoints: ["../client/index.ts"],
+	bundle: true,
+	minify: true,
+	outfile: "../client/build/index.js",
+	sourcemap: false,
+	platform: "node"
+}).catch(() => process.exit(1));
+
+// Bundle HTML, CSS, and JS files
 build({
 	entryPoints: ["../client/src/main.ts"],
 	bundle: true,

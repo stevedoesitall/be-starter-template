@@ -7,3 +7,6 @@
 node_modules/
 sandbox/
 build/
+images/
+
+schema.prisma
