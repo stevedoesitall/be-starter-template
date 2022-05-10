@@ -9,7 +9,7 @@ import esbuildImages from "./plugins/esbuild-images.mjs";
 build({
 	entryPoints: ["../client/index.ts"],
 	bundle: true,
-	minify: true,
+	minify: false,
 	outfile: "../client/build/index.js",
 	sourcemap: false,
 	platform: "node"

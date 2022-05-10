@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
 		"esModuleInterop": true,
 		"target": "ES2021",
 		"moduleResolution": "node",
@@ -10,6 +9,8 @@
 		"strict": true,
 		"noImplicitAny": true,
 		"experimentalDecorators": true,
+		"importsNotUsedAsValues": "error",
+		"isolatedModules": true,
 		"emitDecoratorMetadata": true,
 		"forceConsistentCasingInFileNames": true,
 		"typeRoots": ["./node_modules/@types"]
