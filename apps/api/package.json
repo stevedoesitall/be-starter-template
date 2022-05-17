@@ -9,13 +9,14 @@
 	"author": "Steve Giordano",
 	"license": "ISC",
 	"prisma": {
-		"schema": "src/models/schema.prisma"
+		"schema": "models/schema.prisma"
 	},
 	"devDependencies": {
-		"@types/jsonwebtoken": "^8.5.8",
-		"prisma": "^3.13.0"
+		"prisma": "^3.14.0"
 	},
 	"dependencies": {
-		"jsonwebtoken": "^8.5.1"
+		"@fastify/cookie": "^6.0.0",
+		"@fastify/jwt": "^5.0.1",
+		"@prisma/client": "^3.14.0"
 	}
 }

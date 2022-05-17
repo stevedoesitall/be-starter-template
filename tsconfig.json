@@ -9,7 +9,6 @@
 		"strict": true,
 		"noImplicitAny": true,
 		"experimentalDecorators": true,
-		"importsNotUsedAsValues": "error",
 		"isolatedModules": true,
 		"emitDecoratorMetadata": true,
 		"forceConsistentCasingInFileNames": true,

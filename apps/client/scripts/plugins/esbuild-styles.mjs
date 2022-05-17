@@ -1,6 +1,5 @@
 import child_process from "node:child_process";
 import fs from "node:fs";
-// import type { PluginBuild } from "esbuild";
 
 const esbuildStyles = {
 	name: "esbuild-styles",

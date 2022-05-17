@@ -1,5 +1,4 @@
 import fs from "node:fs";
-// import type { PluginBuild } from "esbuild";
 
 const esbuildHTML = {
 	name: "esbuild-html",

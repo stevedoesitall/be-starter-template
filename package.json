@@ -92,7 +92,9 @@
     "useTabs": true
   },
   "dependencies": {
+    "@prisma/client": "^3.13.0",
     "fastify": "^3.29.0",
+    "fastify-zod": "^1.0.0-rc10",
     "zod": "^3.15.1"
   }
 }
