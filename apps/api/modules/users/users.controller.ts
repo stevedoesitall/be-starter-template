@@ -11,6 +11,7 @@ class UsersController {
         try {
             const user = await UsersServices.createUser(body);
             const token = server.jwt.sign(user);
+            console.log("GENERATING TOKEN");
             return res
                 .setCookie("token", token, {
                     domain: "/",
@@ -23,7 +24,11 @@ class UsersController {
                     user, token
             });
         } catch(err) {
-            return res.code(500).send(err);
+            console.log("ERROR ERROR");
+            return res.code(400).send({
+                "error": err,
+                "ok": false
+            });
         } finally {
             console.log("registerUserHandler complete.");
         }

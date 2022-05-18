@@ -1,5 +1,12 @@
+import * as yup from "yup";
 import { z } from "zod";
 import { buildJsonSchemas } from "fastify-zod";
+
+const yupSchema = yup.object().shape({
+    first_name: yup.string().required(),
+    last_name: yup.string().required(),
+    email: yup.string().required().email()
+});
 
 const coreUsersSchema = {
     email: z.string({
