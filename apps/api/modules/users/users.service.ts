@@ -1,5 +1,5 @@
 import prisma from "../../utils/prisma";
-import { hashPassword, verifyPassword } from "../../utils/hash";
+import { hashPassword } from "../../utils/hash";
 import { CreateUserInput, ReadUserInput } from "./users.schema";
 
 class UsersServices {

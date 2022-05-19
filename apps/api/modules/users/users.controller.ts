@@ -1,33 +1,36 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { server } from "../../server";
+import fastify from "../../src/server";
 import { verifyPassword } from "../../utils/hash";
 import { CreateUserInput, LoginInput } from "./users.schema";
+import { randomUUID } from "node:crypto";
 import UsersServices from "./users.service";
 
 class UsersController {
     async registerUserHandler (req: FastifyRequest<{Body: CreateUserInput}>, res: FastifyReply) {
-        const body = req.body;
+        const uuid = randomUUID();
+        const { body } = req;
+        body.user_id = uuid;
 
         try {
             const user = await UsersServices.createUser(body);
-            const token = server.jwt.sign(user);
-            console.log("GENERATING TOKEN");
+            const token = fastify.jwt.sign(user);
+
             return res
                 .setCookie("token", token, {
                     domain: "/",
                     httpOnly: true,
                     secure: true,
-                    sameSite: true
+                    signed: true
                 })
                 .code(201)
                 .send({
-                    user, token
+                    token,
+                    ok: true
             });
         } catch(err) {
-            console.log("ERROR ERROR");
             return res.code(400).send({
-                "error": err,
-                "ok": false
+                error: err,
+                ok: false
             });
         } finally {
             console.log("registerUserHandler complete.");
@@ -51,10 +54,11 @@ class UsersController {
         });
 
         if (correctPassword) {
+            
             const { password, salt, ...remaining } = user;
-
+            
             return {
-                accessToken: server.jwt.sign(remaining)
+                accessToken: fastify.jwt.sign(remaining)
             };
         }
 

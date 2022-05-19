@@ -2,9 +2,8 @@
 	"name": "api",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon server.ts"
+		"dev": "nodemon index.ts"
 	},
 	"author": "Steve Giordano",
 	"license": "ISC",
@@ -12,12 +11,14 @@
 		"schema": "models/schema.prisma"
 	},
 	"devDependencies": {
+		"mocha": "^10.0.0",
 		"prisma": "^3.14.0"
 	},
 	"dependencies": {
 		"@fastify/cookie": "^6.0.0",
 		"@fastify/jwt": "^5.0.1",
 		"@prisma/client": "^3.14.0",
+		"fastify-yup-schema": "^1.0.4",
 		"yup": "^0.32.11"
 	}
 }

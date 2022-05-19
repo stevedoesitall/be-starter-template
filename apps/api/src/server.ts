@@ -1,9 +1,8 @@
-import fastify, { FastifyReply, FastifyRequest } from "fastify";
+import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import jwt from "@fastify/jwt";
 import cookie from "@fastify/cookie";
-
-import userRoutes from "./modules/users/users.route";
-import { userSchemas } from "./modules/users/users.schema";
+import { fastifyYupSchema } from "fastify-yup-schema";
+import userRoutes from "../modules/users/users.route";
 
 declare module "fastify" {
 	export interface FastifyInstance {
@@ -11,12 +10,11 @@ declare module "fastify" {
 	}
 }
 
-// Move app logic out later
-export const server = fastify({
+export const fastify = Fastify({
 	logger: true
 });
 
-const port = process.env.PORT || 3001;
+const server = fastify;
 
 server.get("/healthcheck", async () => {
 	return {
@@ -25,6 +23,7 @@ server.get("/healthcheck", async () => {
 });
 
 server.register(cookie);
+server.register(fastifyYupSchema);
 
 // Update and move to .env
 server.register(jwt, {
@@ -45,19 +44,8 @@ server.decorate("auth", async (req: FastifyRequest, res: FastifyReply) => {
 	}
 });
 
-userSchemas.forEach(schema => {
-	server.addSchema(schema);
-});
-
 server.register(userRoutes, { 
 	prefix: "/users"
 });
 
-server.listen(port, (err, addr) => {
-	if (err) {
-		server.log.error(err);
-		process.exit(1);
-	} else {
-		console.log(addr);
-	}
-});
+export default server;

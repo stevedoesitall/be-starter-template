@@ -1,71 +1,38 @@
-import * as yup from "yup";
-import { z } from "zod";
-import { buildJsonSchemas } from "fastify-zod";
+import { object, InferType, string } from "yup";
+import { createYupSchema } from "fastify-yup-schema";
 
-const yupSchema = yup.object().shape({
-    first_name: yup.string().required(),
-    last_name: yup.string().required(),
-    email: yup.string().required().email()
+const userBodySchema = object({
+    first_name: string().required(),
+    last_name: string().required(),
+    email: string().required().email(),
+    user_id: string().required(),
+    password: string().required(),
 });
 
-const coreUsersSchema = {
-    email: z.string({
-        required_error: "Email is required",
-        invalid_type_error: "Email must be a string"
-    }).email(),
-    user_id: z.string({
-        required_error: "User ID is required",
-        invalid_type_error: "User ID must be a string"
-    }),
-    first_name: z.string({
-        required_error: "First name is required",
-        invalid_type_error: "First name must be a string"
-    }),
-    last_name: z.string({
-        required_error: "Last name is required",
-        invalid_type_error: "Last name must be a string"
-    })
+const createUserSchema = createYupSchema(() => ({
+    body: userBodySchema
+}));
+
+const loginSchema = object({
+    email: string().required().email(),
+    password: string().required()
+});
+
+const readUserSchema = object({
+    first_name: string().required(),
+    last_name: string().required(),
+    email: string().required().email(),
+    user_id: string().required()
+});
+
+const schemas = {
+    createUserSchema,
+    loginSchema,
+    readUserSchema
 };
 
-const createUserSchema = z.object({
-    ...coreUsersSchema,
-    password: z.string({
-        required_error: "Password is required",
-        invalid_type_error: "Password must be a string"
-    })
-});
+export type CreateUserInput = InferType<typeof userBodySchema>;
+export type LoginInput = InferType<typeof loginSchema>;
+export type ReadUserInput = InferType<typeof readUserSchema>;
 
-const createUserResponseSchema = z.object({
-    ...coreUsersSchema
-});
-
-const loginSchema = z.object({
-    email: z.string({
-        required_error: "Email is required",
-        invalid_type_error: "Email must be a string"
-    }).email(),
-    password: z.string({
-        required_error: "Password is required",
-        invalid_type_error: "Password must be a string"
-    })
-});
-
-const loginResponseSchema = z.object({
-    accessToken: z.string()
-});
-
-const readUserSchema = z.object({
-    ...coreUsersSchema,
-});
-
-export type CreateUserInput = z.infer<typeof createUserSchema>;
-export type LoginInput = z.infer<typeof loginSchema>;
-export type ReadUserInput = z.infer<typeof readUserSchema>;
-
-export const { schemas: userSchemas, $ref } = buildJsonSchemas({
-    createUserSchema,
-    createUserResponseSchema,
-    loginSchema,
-    loginResponseSchema,
-    readUserSchema
-});
+export { schemas as userSchemas };
