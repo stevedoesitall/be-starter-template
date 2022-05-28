@@ -16,9 +16,13 @@
 			"user_id": "fake"
 		}
 
-		const data = await fetch("http://127.0.0.1:3001/users/signup", {
+		const data = await fetch("https://api.momus.io/users/signup", {
 			method: "POST",
-			body: JSON.stringify(testData)
+			body: JSON.stringify(testData),
+			mode: "cors",
+			headers: {
+				"Access-Control-Allow-Origin": "https://momus.io/"
+			}
 		});
 
 		const response = await data.json();

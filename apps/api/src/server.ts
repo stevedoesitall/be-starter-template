@@ -1,6 +1,7 @@
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import jwt from "@fastify/jwt";
-import cookie from "@fastify/cookie";
+import cookie, { FastifyCookieOptions } from "@fastify/cookie";
+import cors from "@fastify/cors";
 import { fastifyYupSchema } from "fastify-yup-schema";
 import userRoutes from "../modules/users/users.route";
 
@@ -10,11 +11,26 @@ declare module "fastify" {
 	}
 }
 
-export const fastify = Fastify({
+const server = Fastify({
 	logger: true
 });
 
-const server = fastify;
+server.register(cookie);
+
+server.register(cors, {
+	origin: "https://momus.io"
+});
+
+// Update and move to .env
+server.register(jwt, {
+	secret: "somesecrethere",
+	cookie: {
+		cookieName: "authorization",
+		signed: true
+	}
+});
+
+export const fastify = server;
 
 server.get("/healthcheck", async () => {
 	return {
@@ -22,17 +38,9 @@ server.get("/healthcheck", async () => {
 	};
 });
 
-server.register(cookie);
-server.register(fastifyYupSchema);
 
-// Update and move to .env
-server.register(jwt, {
-	secret: "somesecrethere",
-	cookie: {
-		cookieName: "token",
-		signed: true
-	}
-});
+
+server.register(fastifyYupSchema);
 
 server.decorate("auth", async (req: FastifyRequest, res: FastifyReply) => {
 	try {

@@ -16,17 +16,18 @@ class UsersController {
             const token = fastify.jwt.sign(user);
 
             return res
-                .setCookie("token", token, {
-                    domain: "/",
+                .setCookie("authorization", token, {
+                    maxAge: 1000 * 60 * 60 * 24, 
+                    path: "/",
                     httpOnly: true,
                     secure: true,
-                    signed: true
+                    sameSite: "strict"
                 })
                 .code(201)
                 .send({
                     token,
                     ok: true
-            });
+                });
         } catch(err) {
             return res.code(400).send({
                 error: err,

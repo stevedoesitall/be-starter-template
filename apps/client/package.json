@@ -5,13 +5,13 @@
 	"main": "build/index.js",
 	"scripts": {
 		"build": "node scripts/build.mjs",
-		"serve": "nodemon .",
-		"build:serve": "npm run build && npm run serve"
+		"dev": "nodemon .",
+		"build:dev": "npm run build && npm run dev",
+		"start": "npm run build && node ."
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@fastify/static": "^5.0.2",
 		"@felte/validator-yup": "^1.0.8",
 		"esbuild": "^0.14.38",
 		"esbuild-svelte": "^0.7.0",
@@ -26,6 +26,7 @@
 		"@tsconfig/svelte": "^3.0.0",
 		"@types/page": "^1.11.5",
 		"bulma": "^0.9.3",
+		"http-server": "^14.1.0",
 		"playwright": "^1.22.1"
 	}
 }
