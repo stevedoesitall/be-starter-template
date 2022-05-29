@@ -4,7 +4,7 @@ const esbuildServer = {
 	name: "esbuild-server",
 	setup(build) {
 		build.onStart(() => {
-            fs.writeFileSync("./build/public/index.js", "");
+			fs.writeFileSync("./build/public/index.js", "");
 		});
 	}
 };

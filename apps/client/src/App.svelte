@@ -9,12 +9,12 @@
 	const signup = async () => {
 		const ts = new Date().getTime();
 		const testData = {
-			"password": "abc123d",
-    		"email": "steve" + ts + "@test.com",
-    		"first_name": "Steve",
-    		"last_name": "Giordano",
-			"user_id": "fake"
-		}
+			password: "abc123d",
+			email: "steve" + ts + "@test.com",
+			first_name: "Steve",
+			last_name: "Giordano",
+			user_id: "fake"
+		};
 
 		const data = await fetch("https://api.momus.io/users/signup", {
 			method: "POST",
@@ -28,8 +28,7 @@
 		const response = await data.json();
 
 		console.log(response);
-	}
-
+	};
 </script>
 
 <div>
@@ -40,5 +39,4 @@
 
 	<button on:click={exampleFunc}>Click Me</button>
 	<button on:click={signup}>Signup</button>
-
 </div>

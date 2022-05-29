@@ -38,8 +38,6 @@ server.get("/healthcheck", async () => {
 	};
 });
 
-
-
 server.register(fastifyYupSchema);
 
 server.decorate("auth", async (req: FastifyRequest, res: FastifyReply) => {
@@ -52,7 +50,7 @@ server.decorate("auth", async (req: FastifyRequest, res: FastifyReply) => {
 	}
 });
 
-server.register(userRoutes, { 
+server.register(userRoutes, {
 	prefix: "/users"
 });
 
