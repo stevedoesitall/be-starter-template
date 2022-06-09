@@ -21,8 +21,12 @@
 			body: JSON.stringify(testData),
 			mode: "cors",
 			headers: {
-				"Access-Control-Allow-Origin": "https://momus.io/"
-			}
+				"Access-Control-Allow-Origin": "https://api.momus.io",
+				"Access-Control-Allow-Origin-Credentials": "true",
+				"Accept": "application/json",
+				"Content-Type": "application/json"
+			},
+			credentials: "include"
 		});
 
 		const response = await data.json();

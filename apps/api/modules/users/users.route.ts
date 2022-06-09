@@ -19,11 +19,13 @@ const userRoutes = async (server: FastifyInstance) => {
 	//     }
 	// }, UsersController.loginHandler);
 
-	// server.get("/", {
-	//     preHandler: [
-	//         server.auth
-	//     ]
-	// }, UsersController.getUsersHandler);
+	server.get(
+		"/:id",
+		{
+			preHandler: [server.authenticate]
+		},
+		UsersController.getUsersHandler
+	);
 };
 
 export default userRoutes;

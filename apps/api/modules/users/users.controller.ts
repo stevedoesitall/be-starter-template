@@ -1,11 +1,18 @@
-import { FastifyReply, FastifyRequest } from "fastify";
-import fastify from "../../src/server";
-import { verifyPassword } from "../../utils/hash";
-import { CreateUserInput, LoginInput } from "./users.schema";
 import { randomUUID } from "node:crypto";
+import { ControllerBase } from "../../configs/controller.config";
+import { CreateUserInput, LoginInput } from "./users.schema";
 import UsersServices from "./users.service";
+import { verifyPassword } from "../../utils/hash";
+import fastify from "../../src/server";
 
-class UsersController {
+import type { FastifyReply, FastifyRequest } from "fastify";
+
+const ROUTE_NAME = "users";
+
+class UsersController extends ControllerBase {
+	constructor() {
+		super(ROUTE_NAME);
+	}
 	async registerUserHandler(
 		req: FastifyRequest<{ Body: CreateUserInput }>,
 		res: FastifyReply
@@ -21,10 +28,11 @@ class UsersController {
 			return res
 				.setCookie("authorization", token, {
 					maxAge: 1000 * 60 * 60 * 24,
-					path: "/",
 					httpOnly: true,
 					secure: true,
-					sameSite: "strict"
+					sameSite: "none",
+					domain: "momus.io",
+					path: "/"
 				})
 				.code(201)
 				.send({
@@ -32,6 +40,7 @@ class UsersController {
 					ok: true
 				});
 		} catch (err) {
+			console.log(err);
 			return res.code(400).send({
 				error: err,
 				ok: false
@@ -74,6 +83,11 @@ class UsersController {
 	}
 
 	async getUsersHandler() {
+		const users = await UsersServices.findUsers();
+		return users;
+	}
+
+	async getUserHandler() {
 		const users = await UsersServices.findUsers();
 		return users;
 	}

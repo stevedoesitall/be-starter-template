@@ -18,6 +18,10 @@ const esbuildImages = {
 			};
 			copyFolderSync("./public/images/", "./build/public/assets/images/");
 		});
+
+		build.onEnd(() => {
+			console.log("Building images finished.");
+		});
 	}
 };
 

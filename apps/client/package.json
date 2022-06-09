@@ -2,12 +2,9 @@
 	"name": "client",
 	"version": "1.0.0",
 	"description": "",
-	"main": "build/index.js",
 	"scripts": {
 		"build": "node scripts/build.mjs",
-		"dev": "nodemon .",
-		"build:dev": "npm run build && npm run dev",
-		"start": "npm run build && node ."
+		"build:watch": "npm run build --mode watch"
 	},
 	"author": "",
 	"license": "ISC",
